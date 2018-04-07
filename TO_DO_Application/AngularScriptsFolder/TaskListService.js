@@ -1,4 +1,4 @@
-﻿///// <reference path="scripts/angular.js" />
+﻿/// <reference path="scripts/angular.js" />
 
 var GettingData = angular.module("FetchingDataModule", [])
     .controller("FetchingDataController", function ($scope, $http) {
