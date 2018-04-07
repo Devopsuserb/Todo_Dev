@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>To Do</title>
+    <script src="Scripts/jquery-1.9.0.js"></script>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <script src="Scripts/bootstrap.js"></script>
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-route.js"></script>
+    <script src="AngularScriptsFolder/TaskListService.js"></script>
+    <link href="Styles/NewStyleSheet.css" rel="stylesheet" />
+</head>
+
+<body ng-app="FetchingDataModule" ng-controller="FetchingDataController">
+    <!-- A jumbotron to design the top section of the webpage -->
+    <div id ="#" class="jumbotron" >
+        <div class="container">
+            <h1> Task list</h1>
+            <p> Lot to do. Break into small pieces. <br />Do everyday <br /> Achieve everytask</p>
+        </div>
+    </div>
+    <div style="position:relative">
+                    
+    </div>
+    <div class="container" id="TaskAndControlsContainer" style="min-height: 700px">
+        <!-- Declaring a dropdown button to show the completed and active tasks -->
+        <p>Select</p>
+        <select ng-model="SearchText.TaskButtonStatus">
+            <option value="ACTIVE"> Completed tasks</option>
+            <option value="COMPLETED">Active tasks</option>
+            <option value="E">ALL</option>
+        </select>
+        <br /><br />
+        <!-- Declaring a table to align elements  -->
+                  <form class="form-inline">
+                      <i style="float:left"> Total Completed Tasks: {{ChartData.CompletedRecordCount}} </i>
+                      <i id="FloatRight"> Total Active Tasks: {{ChartData.ActiveRecordCount}} </i>
+                  </form>
+        <br /><br />
+        <form class="form-inline">
+            <input type="text" placeholder="Search Text" id="SearchTextBox" ng-model="SearchText.TaskName" />
+            <div id="FloatRight">
+                <button type="button" id="DeleteAllTasks" class="btn btn-lg btn-danger" ng-click="DeleteAllData()"> Delete All Tasks </button>
+            </div>
+        </form>
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th scope="col"> #</th>
+                        <th scope="col" id="TextAlignCenter">Task</th>
+                        <th scope="col" style="text-align:right"> Task Status</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="TaskRow" 
+                        ng-repeat="Task in TaskList | filter : SearchText" 
+                        ng-style=" Task.TaskButtonStatus == 'COMPLETED'? {color:'#ffff66', 'background-color':'#66a3ff'} : {color:' #000000', 'background-color':'#c3c388'}">
+                        <th scope="row">
+                            {{Task.Numbering}}
+                        </th>
+                        <td id="TextAlignCenter">
+                            {{Task.TaskName}}
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-success" id="FloatRight" ng-click="StatusChange(Task)">{{Task.TaskStatus}}</button>
+                        </td>
+                        <td>
+                            <button type="button" id="FloatRight" class="btn btn-danger" ng-click="DeleteData(Task)"> Delete </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"> # </th>
+                        <td><input type="text" id="NewTaskPlaceHolder" placeholder="Enter New Task" maxlength="200" ng-model="InsertTaskName" required /></td>
+                        <td>
+                            <button type="button" class="btn btn-info" id="FloatRight" ng-click="InsertTask(InsertTaskName)"> Add</button>
+                        </td>
+                    </tr>
+                </tbody>
+                <!--<caption> Tasks </caption>-->
+            </table>
+    </div>
+    <div class="container-fluid" id="AboutTheApplication">
+        <div class="col-md-5" id="AboutTheApplication">
+            <h1> The application</h1>
+            <p>
+                <b>TO DO</b> is developed to help users to track their
+                tasks and the progress to make their daily life easy and better.<br />Everyone wants to achieve
+                their tasks but sometimes it is hard to keep a track of them. To help users in tracking their tasks
+                and working on achieving them we help. <b>TO DO </b>is designed simple
+                as a Single Page Application design with special features.
+                <h3>What can you do?</h3>
+                <h6 style="text-align:justify"> My answer you can do a lot</h6>
+                <ul>
+                    <li>
+                        The task table contains tasks marked in different
+                        colors the active tasks are in Blue and the completed tasks in Gold.
+                    </li> 
+                    <li>
+                        A search box is available to search  from the tasks.
+                    </li> 
+                    <li>
+                        A drop down is provided to toggle from all records
+                        to completed/active tasks.
+                    </li> 
+                    <li>
+                        A add button is provided for adding new tasks. User can
+                        change the status of the task from active to completed or vice-versa.
+                    </li>
+                    <li>
+                        User can either delete a single task or all the tasks at once
+                    </li>
+                </ul>
+        </div>
+        <div class="col-md-7">
+            <img src="Images/BlueCoast.jpg" alt="About" id="AboutImage"/>
+        </div>
+    </div>
+    <footer class="container-fluid modal-footer">
+        <p class="float-right">
+        <br /><br /><br /><br />
+        <a href="#">Back to top</a>
+        </p>
+        <p>*Images from internet</p>
+    </footer>
+</body>
+</html>
